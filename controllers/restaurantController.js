@@ -25,7 +25,14 @@ export const getAllRestaurants = async (req,res) => {
 };
 
 export const createRestaurant = async (req,res) => {
-    const restaurant = new Restaurant(req.body);
+    const {name,location} = req.body;
+    const image = req.file.path
+
+    const restaurant = new Restaurant({
+        name,
+        location,
+        image
+    });
     const saved = await restaurant.save();
     res.status(201).json({
         message: 'Restaurant Created Successfully',
